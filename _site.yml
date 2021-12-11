@@ -1,0 +1,30 @@
+---
+name: "Chris"
+output_dir: "docs"
+navbar:
+  title: "Chris Paul Evolution --- Can't Give Up Now ..."
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Amazing Charts!"
+      href: amazing.html
+    - icon: fab fa-linkedin
+      href: https://www.linkedin.com/in/dane-wang/
+    
+output: 
+  html_document:
+    includes:
+      in_header: 
+        ["hero-image.html","about-text.html"]
+    theme: journal
+    toc: true
+    toc_float: true
+    toc_collapsed: true
+    toc_depth: 4
+    number_sections: true
+    highlight: tango
+    css: ["dytheme.css","abouttheme.css"]
+    
+---

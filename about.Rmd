@@ -1,0 +1,190 @@
+---
+title: ""
+output: 
+  html_document:
+    includes:
+      in_header: 
+        "about-text.html"
+      css:
+        "abouttheme.css"
+
+---
+
+# Overiview
+
+NBA is going to celebrate its 75th anniversary and as a big fan of NBA and Chris Paul, I would like to take this great opportunity to use data visualizations to show and reflect his evolution to “Point-God”. This website will apply his whole career game log and shot log, including both regular seasons and playoffs, to show how he impacted the game and his teammates.  
+
+# Dataset
+
+## Game Log
+1400 game log dataset that I collected from, [Basketball Reference]( https://www.basketball-reference.com/players/p/paulch01/gamelog/2021) including the game results, fundamental stats (Points, Offensive Rebounds, Assists, Field Goal Attempts and so on) and advanced stats (Effective Field Goal Percentage, Assist Percentage and so on). Take the first ten columns as an example.
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,echo = FALSE) 
+```
+
+```{r}
+library(DT)
+library(widgetframe)
+logdata <- read.csv('gamelog.csv', stringsAsFactors = FALSE, 
+              na.strings=c('NA',''), sep = ",")
+names(logdata)[names(logdata) == '锘緿ate'] <- "Date"
+dt <- datatable(logdata,fillContainer = F)
+frameWidget(dt, width = '100%', height = '2500%')
+```
+
+## Shot Log
+The dataset of shot log detail that is generated from [NBA Stats Api](  https://github.com/swar/nba_api). The dataset include shot detail information (shot zone area, range, and distance), and game information (game date, 
+game remaining and so on). There are some data pre-processing tasks that can 
+expect, such as join different season sub-dataset and drop the inactive game. Take the first six columns of 2020-21 playoffs as an example.
+
+```{r}
+shotlog <- read.csv('shotlog_example.csv', stringsAsFactors = FALSE, na.strings=c('NA',''), sep = ",")
+shotlog_table <- datatable(shotlog,fillContainer = F)
+frameWidget(shotlog_table, width = '102%', height = '2500%')
+```
+
+## Data Wrangling
+
+
+### Game Log Dataset
+
+
+
+Fill the NA value
+```{r}
+library(hrbrthemes)
+library(naniar)
+gg_miss_upset(logdata)
+logactive <- read.csv('gamelog_active.csv', stringsAsFactors = FALSE, na.strings=c('NA',''), sep = ",")
+```      
+
+Change data types, generate new data variable like result difference, and subset the active game dataset. As you can see below, he already played more than 1200 games during last 16 seasons.
+
+```{r}
+library(ggplot2)
+library(dplyr)
+logdata %>% count(GS) %>% arrange(desc(n)) %>% 
+ggplot(mapping=aes(x=reorder(GS,n),y=n))+
+  geom_bar(stat='identity',fill = '#FC766A')+
+  labs(
+  title = 'Chris Paul Career Game Status [2005-2021]', 
+  x = 'Game Status Types', y = 'Number of Games')+
+     theme(axis.text.x = element_text(size = 10),
+           panel.grid.major=element_line(colour=NA),
+            panel.background = element_rect(fill = "transparent",colour = NA),
+            plot.background = element_rect(fill = "transparent",colour = NA),
+           plot.title = element_text(color="black", size=12, face="bold.italic",
+	                                vjust=3, hjust = 0.5),
+           axis.title.x = element_text(color="black", size=10, face="bold",vjust=-1),
+           axis.title.y = element_text(color="black", size=10, face="bold",vjust=4),
+           panel.grid.minor = element_blank())+coord_flip()+
+  scale_y_continuous(expand = c(0, 0), limits = c(0,NA))+
+geom_text(aes(label=n),width=.8, position = position_dodge(width = .25),hjust = 1.,size = 2,face="bold") 
+```
+
+### Shot Log Dataset
+
+Shot Log Dataset has no NA values
+
+```{r}
+gg_miss_var(shotlog)+ ylim(0, 3)+
+  theme(axis.text.y = element_text(size = 6,face = 'bold'))
+```
+
+Add two new features: seasontype and season, which can help us connect the game log dataset and shot log dataset and gain some insightful ideas.    
+
+```{r}
+shotlog_total <- read.csv('df_total.csv', stringsAsFactors = FALSE, na.strings=c('NA',''), sep = ",")
+
+log_season <- logactive %>% group_by(Seasontype) %>% count(season)
+shot_season <- shotlog_total %>% group_by(seasontype) %>% count(season)
+colnames(log_season) [3] = 'gamenum'
+colnames(shot_season)[3] = 'shotnum'
+
+combine_log_shot<-inner_join(log_season,shot_season,
+                             by.log_season ="season",
+                             by.shot_season = "season")
+combine_log_shot <- combine_log_shot[which(combine_log_shot$Seasontype==combine_log_shot$seasontype),] %>%
+  select(Seasontype,season,gamenum,shotnum)
+
+combine_log_shot <- combine_log_shot %>%arrange(desc(gamenum))
+
+
+ggplot(combine_log_shot, aes(x=reorder(season,gamenum,sum), y=gamenum,fill =Seasontype)) +
+    geom_bar(stat='identity', position='dodge')+
+  scale_fill_manual(values = c("playoffs" = '#484878',
+                                "regular" = '#FC766A'))+coord_flip()+
+  labs(
+  title = 'Chris Paul Career Active Game Numbers [2005-2021]', 
+  x = 'Seasons', y = 'Number of Games')+theme_bw()+
+	theme(panel.grid.major=element_line(colour=NA),
+            panel.background = element_rect(fill = "transparent",colour = NA),
+            plot.background = element_rect(fill = "transparent",colour = NA),
+            panel.grid.minor = element_blank(),
+	          panel.border = element_blank(),
+	      plot.title = element_text(color="black", size=12, face="bold.italic",
+	                                vjust=3, hjust = 0.5),
+        axis.title.x = element_text(color="black", size=10, face="bold",vjust=-1),
+        axis.title.y = element_text(color="black", size=10, face="bold",vjust=4))
+
+ggplot(combine_log_shot, aes(x=reorder(season,shotnum,sum),
+                             y=shotnum,fill =Seasontype)) +
+    geom_bar(stat='identity', position='dodge')+
+  scale_fill_manual(values = c("playoffs" = '#484878',
+                                "regular" = '#FC766A'))+coord_flip()+
+  labs(
+  title = 'Chris Paul Career Active Game Shot Numbers [2005-2021]', 
+  x = 'Seasons', y = 'Number of Shots')+theme_bw()+
+	theme(panel.grid.major=element_line(colour=NA),
+            panel.background = element_rect(fill = "transparent",colour = NA),
+            plot.background = element_rect(fill = "transparent",colour = NA),
+            panel.grid.minor = element_blank(),
+	          panel.border = element_blank(),
+	      plot.title = element_text(color="black", size=12, face="bold.italic",
+	                                vjust=3, hjust = 0.5),
+        axis.title.x = element_text(color="black", size=10, face="bold",vjust=-1),
+        axis.title.y = element_text(color="black", size=10, face="bold",vjust=4))
+
+
+
+```
+
+```{r}
+library(plotly)
+
+pal <- c("#484878","#FC766A")
+
+fig <- plot_ly(data = combine_log_shot, x = ~gamenum, y = ~shotnum, color = ~Seasontype, colors = pal,
+               text = ~paste('</br> Season: ', season,
+                      '</br> Active Game Number: ', gamenum,
+                      '</br> Shot Number: ', shotnum))
+
+t <- list(
+  family = "TT Arial",
+  size = 12,
+  color = 'black')
+
+fig <- fig %>% layout(title = '<b><i>Chris Paul Career Active Game Number VS Shot Number [2005-2021]</b></i>',
+                      font = t,
+         xaxis = list(title = '<b>Career Active Game Number</b>',
+                      zeroline = TRUE,
+                      range = c(0, 100),
+                      size=8, face="bold"),
+         yaxis = list(title = '<b>Shot Number</b>',
+                      range = c(0,1400)),
+         size=8, face="bold")
+
+
+
+fig %>%config(displayModeBar = F)
+```
+
+From above three graphs, big picture is that when he played more games, he would shot more, especially during the playoffs. For instance, 2020-2021 and 2017-2018, it was his first time to go to the NBA Final and Western Conference Final. However, some abnormal seasons also appears, such as: 2010-2011 regular season and 2005-2006 regular season.   
+
+
+
+# Who Am I
+
+My name is Deyuan Wang and I am a second year graduate student in Georgetown University Data Science and Analytics Program. In addition, I am a 12-years big fan of Chris Paul :). Welcome to click the Linkedin icon on the top to learn more about me.
+
+
