@@ -1,0 +1,23 @@
+#header_block {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 80%; /*<-- added semi colon*/
+    text-align: center;
+}
+.header_item {
+   display: inline-block;
+   vertical-align: middle; /* add this */
+   letter-spacing: 0.065em;
+   line-height: -1em;
+   font-size: 48px;
+   text-transform: uppercase;
+}
+
+.amazing-image {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 100%; /*<-- added semi colon*/
+    text-align: center;
+}

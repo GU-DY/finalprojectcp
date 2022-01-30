@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>amazing.knit</title>
+
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<div id='header_block'>
+    <img class='logo-image' src="cpnewlogo.jpg" style="width:65px; height:75px;">
+    <h1 class='header_item'>Chris Paul Evolution</h1>
+
+</div>
+
+<img class="amazing-image" src="suns-vs-wizards.jpg" style="height:350px;"></div>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="dytheme.css" type="text/css" />
+<link rel="stylesheet" href="abouttheme.css" type="text/css" />
+<link rel="stylesheet" href="amazing.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Chris Paul Evolution --- Can't Give Up Now ...</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="amazing.html">Suns VS Wizards Preview</a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/dane-wang/">
+    <span class="fab fa-linkedin"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="possible-lineup" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Possible Lineup</h1>
+<div id="injury-condition" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Injury Condition</h2>
+<p>Suns injury players who might not out for the game include: Cameron Payne, Jae Crowder, Deandre Ayton, JaVale McGee, Abdel Nader11, Dario Saric, and Frank Kaminsky.</p>
+<p>All Wizards players currently can play the game.</p>
+</div>
+<div id="rotation-matchup" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Rotation Matchup</h2>
+<p><img src="lineup.jpg" width="100%" style="display: block; margin: auto;" /> Due to the injury, Wizards have more bench support. In addition, most bench players are front court, so it would be an interesting night to see whether two Suns excellent guards can punish the mismatch.</p>
+</div>
+</div>
+<div id="heatmap" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Heatmap</h1>
+<div id="shot-attempts-heatmap" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Shot Attempts Heatmap</h2>
+<p><img src="teamattemptone.jpg" width="100%" style="display: block; margin: auto;" /> Deeper color shows more frequent attempts.</p>
+<p>Basically, two teams have similar shot attempts distribution around three points line, corner and wings. Wizards have more attempts on the paint area, especially the restricted area. Therefore, guarding inside is important to win the games.</p>
+<p><img src="playerattemptone.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playerattempttwo.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playerattemptthree.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playerattemptfour.jpg" width="100%" style="display: block; margin: auto;" /> <img src="playerattemptfive.jpg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="field-goal-percentage-vs-league-average-heatmap" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Field Goal Percentage VS League Average Heatmap</h2>
+<p><img src="teamvsone.jpg" width="100%" style="display: block; margin: auto;" /> Suns is good at mid-range, especially in the right side of the court, and there is not a specific blind spot around the three-points line. While the wizards is more proficient in left wing and corner three points than right wings.</p>
+<p><img src="playervsone.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playervstwo.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playervsthree.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playervsfour.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="playervsfive.jpg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="heatmap-short-summary" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Heatmap Short Summary</h2>
+<p>It would be better to combine these two types of heat maps to have a better understanding of players’ shot choice and efficiency.</p>
+<p>Wizards Starting Lineup:</p>
+<p>Dinwiddie, likes attacking the rim and two wings three-points, but overall his shot efficiency is not high.</p>
+<p>Kcp, take cares of his sweet points-left corner three.</p>
+<p>Kuzma, he frequently starts attack from the middle, be careful around the free-throw line zone.</p>
+<p>Beal, he is good at mid-range in different angle and left corner three, so it would better to push him to shot more long two points around left cornor.</p>
+<p>Gafford, he is good at finish the basket in the restricted area.</p>
+<p>Wizards Bench Support:</p>
+<p>Avdija, like Kuzma, he loves attacking in the middle and top three points is his sweet point.</p>
+<p>Thomas Bryant, not like traditional center, he can make three points, especially on the top.</p>
+<p>Hachimura, besides attacking the rim around the restricted area, take care of in the right wing three points and left mid-range jump shot.</p>
+<p>Harrell, besides restricted area, he extended his shoot efficiency area to the left mid range and above the free throw line, so try to push him attack on the right.</p>
+<p>Kispert, is good at finishing basket in the both corner three points and restricted area.</p>
+<p>Bertans, frequently shots three points in the both left and right wings near the top, but the efficiency is not great. However, his three points in the both corners is much better the league average.</p>
+<p>Hopefully, there are some unexpected results that can help you better prepare for the game :).</p>
+<p><img src="sunwin.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
